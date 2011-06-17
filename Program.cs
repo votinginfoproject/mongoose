@@ -38,6 +38,7 @@ namespace Builder {
                     oFeedWriter.WriteLocalities();
 
             } catch (Exception ex) {
+                // TODO: Write success or failure to a text file
                 Console.WriteLine(ex.Message.ToString());
             }
 

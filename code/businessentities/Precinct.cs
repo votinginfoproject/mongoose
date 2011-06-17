@@ -4,6 +4,9 @@ using noi.votinginfoproject.interfaces;
 
 namespace noi.votinginfoproject.businessentities
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Precinct : ICreateable
     {
         public int Id { get; set; }
@@ -11,6 +14,10 @@ namespace noi.votinginfoproject.businessentities
         public int LocalityId { get; set; }
         public int PollingLocationId { get; set; }
 
+        /// <summary>
+        /// Assigns its properties with a record from a database.
+        /// </summary>
+        /// <param name="oDataReader">Data reader that holds the elements to populate itself with. Uses the abstract class <see cref="DbDataReader"/> to work with data readers for different DBMSs.</param>
         public void Create(DbDataReader oDataReader)
         {
             int iId;

@@ -7,6 +7,9 @@ using noi.votinginfoproject.businessentities;
 
 namespace noi.votinginfoproject.dal
 {
+    /// <summary>
+    /// Defines the queries to get the appropriate information
+    /// </summary>
     public abstract class Queries
     {
         public const string PollingPlaces = "select id, location_name, line1, city, state, zip, directions, polling_hours from [Table]";

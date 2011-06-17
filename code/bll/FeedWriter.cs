@@ -8,6 +8,9 @@ using noi.votinginfoproject.interfaces;
 
 namespace noi.votinginfoproject.bll
 {
+    /// <summary>
+    /// Writes the XML file the application is designed to produce
+    /// </summary>
     public class FeedWriter
     {
         private string _sOutputFileNameFormat = "{0}vipFeed-{1}.xml";
@@ -16,6 +19,12 @@ namespace noi.votinginfoproject.bll
 
         #region XML Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oXmlConfig"></param>
+        /// <param name="sOutputFile"></param>
+        /// <returns></returns>
         private XmlWriter CreateXmlWriter(NameValueCollection oXmlConfig, String sOutputFile)
         {
             XmlWriterSettings xmlSettings = new XmlWriterSettings();
@@ -26,22 +35,39 @@ namespace noi.votinginfoproject.bll
             return XmlWriter.Create(sOutputFile, xmlSettings);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sFilePath"></param>
+        /// <param name="sFIPS"></param>
+        /// <returns></returns>
         private string FormatFileName(string sFilePath, string sFIPS)
         {
             return String.Format(_sOutputFileNameFormat, sFilePath, sFIPS);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sElementName"></param>
         public void WriteStartElement(string sElementName)
         {
             _oXmlWriter.WriteStartElement(sElementName);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void WriteEndElement()
         {
             _oXmlWriter.WriteEndElement();
             _oXmlWriter.Flush();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oVipConfig"></param>
         public void WriteHeader(NameValueCollection oVipConfig)
         {
             _oXmlWriter.WriteAttributeString("xmlns", "xsi", null, "http://www.w3.org/2001/XMLSchema-instance");
@@ -63,6 +89,11 @@ namespace noi.votinginfoproject.bll
             WriteEndElement();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sElementName"></param>
+        /// <param name="oConfig"></param>
         public void WriteElementFromConfig(String sElementName, NameValueCollection oConfig)
         {
             WriteStartElement(sElementName);
@@ -88,6 +119,9 @@ namespace noi.votinginfoproject.bll
 
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void WritePollingPlaces()
         {
             PollingPlaceCollection oPollingPlaces = _oDataAccess.GetPollingPlaces();
@@ -122,6 +156,9 @@ namespace noi.votinginfoproject.bll
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void WriteStreetSegments()
         {
             StreetSegmentCollection oStreetSegments = _oDataAccess.GetStreetSegments();
@@ -169,6 +206,9 @@ namespace noi.votinginfoproject.bll
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void WritePrecincts()
         {
             PrecinctCollection oPrecincts = _oDataAccess.GetPrecincts();
@@ -186,6 +226,9 @@ namespace noi.votinginfoproject.bll
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void WritePrecinctSplits()
         {
             PrecinctSplitCollection oPrecinctSplits = _oDataAccess.GetPrecinctSplits();
@@ -206,6 +249,9 @@ namespace noi.votinginfoproject.bll
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void WriteLocalities()
         {
             LocalityCollection oLocalities = _oDataAccess.GetLocalities();
@@ -223,6 +269,12 @@ namespace noi.votinginfoproject.bll
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sFilePath"></param>
+        /// <param name="sFIPS"></param>
+        /// <param name="oWriterSettings"></param>
         public FeedWriter(string sFilePath, string sFIPS, NameValueCollection oWriterSettings)
         {
             _oXmlWriter = CreateXmlWriter(oWriterSettings, FormatFileName(sFilePath, sFIPS));
